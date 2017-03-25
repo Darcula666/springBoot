@@ -3,14 +3,33 @@ package com.gfdz.entity;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * Created by Administrator on 2017/3/25.
  */
-@Component
-@ConfigurationProperties(prefix = "girl")
+@Entity
+@Table(name = "girl")
 public class GirlEntity {
+    private Integer id;
     private String cupSize;
     private Integer age;
+
+    public GirlEntity() {
+    }
+
+    @Id
+    @GeneratedValue
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getCupSize() {
         return cupSize;
