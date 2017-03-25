@@ -1,4 +1,4 @@
-package com.gfdz.controller;
+package com.gfdz.repository;
 
 import com.gfdz.entity.GirlEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

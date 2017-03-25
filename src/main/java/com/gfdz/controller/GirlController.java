@@ -1,10 +1,13 @@
 package com.gfdz.controller;
 
 import com.gfdz.entity.GirlEntity;
+import com.gfdz.repository.GirlRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.net.SocketTimeoutException;
 import java.util.List;
 
 /**
@@ -30,9 +33,14 @@ public class GirlController {
      *
      * @param girl
      * @return
+     * @Valid:验证
      */
     @PostMapping("/girls")
-    public GirlEntity girlAdd(GirlEntity girl) {
+    public GirlEntity girlAdd(@Valid GirlEntity girl, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            System.out.println(bindingResult.getFieldError().getDefaultMessage());
+            return null;
+        }
         return girlRepository.save(girl);
     }
 
@@ -64,20 +72,22 @@ public class GirlController {
 
     /**
      * 删除
+     *
      * @param id
      */
     @DeleteMapping(value = "/girls/{id}")
-    public void deleteGirl(@PathVariable("id") Integer id){
-            girlRepository.delete(id);
+    public void deleteGirl(@PathVariable("id") Integer id) {
+        girlRepository.delete(id);
     }
 
     /**
      * 通过年龄查询女生列表
+     *
      * @param age
      */
     @GetMapping(value = "/girls/age/{age}")
-    public List<GirlEntity> girlListByAge(@PathVariable Integer age){
-        return  girlRepository.findByAge(age);
+    public List<GirlEntity> girlListByAge(@PathVariable Integer age) {
+        return girlRepository.findByAge(age);
     }
 
 }

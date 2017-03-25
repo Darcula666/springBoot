@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
 
 /**
  * Created by Administrator on 2017/3/25.
@@ -16,6 +17,8 @@ import javax.persistence.Table;
 public class GirlEntity {
     private Integer id;
     private String cupSize;
+
+    @Min(value = 18, message = "未成年少女禁止入内")
     private Integer age;
 
     public GirlEntity() {
