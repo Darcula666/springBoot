@@ -15,15 +15,22 @@ public class GirlService {
     @Autowired
     private GirlRepository girlRepository;
 
-    public void getAge(Integer id) throws Exception{
-        GirlEntity girl=girlRepository.findOne(id);
-        Integer age=girl.getAge();
-        if(age<10){
+    public void getAge(Integer id) throws Exception {
+        GirlEntity girl = girlRepository.findOne(id);
+        Integer age = girl.getAge();
+        if (age < 10) {
             //返回“你还在上小学吧” code:100
             throw new GirlException(ResultEnum.PRIMARY_SCHOOL);
-        }else if(age>10&&age<16){
-           //你可能已经上初中了 code:101
+        } else if (age > 10 && age < 16) {
+            //你可能已经上初中了 code:101
             throw new GirlException(ResultEnum.MIDDLE_SCHOOL);
         }
+    }
+
+    /**
+     * 通过id查询一个女生信息
+     */
+    public GirlEntity findOne(Integer id) {
+        return girlRepository.findOne(id);
     }
 }
