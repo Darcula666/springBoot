@@ -1,7 +1,10 @@
 package com.gfdz.controller;
 
 import com.gfdz.entity.GirlEntity;
+import com.gfdz.entity.ResultEntity;
 import com.gfdz.repository.GirlRepository;
+import com.gfdz.service.GirlService;
+import com.gfdz.utils.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +20,8 @@ import java.util.List;
 public class GirlController {
     @Autowired
     private GirlRepository girlRepository;
+    @Autowired
+    private GirlService girlService;
 
     /**
      * 查询所有女生列表
@@ -36,12 +41,13 @@ public class GirlController {
      * @Valid:验证
      */
     @PostMapping("/girls")
-    public GirlEntity girlAdd(@Valid GirlEntity girl, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            System.out.println(bindingResult.getFieldError().getDefaultMessage());
-            return null;
+    public ResultEntity<GirlEntity> girlAdd(@Valid GirlEntity girl, BindingResult bindingResult) {
+        ResultEntity result=new ResultEntity();
+        if (bindingResult.hasErrors()) {//发生错误
+            return ResultUtil.error(1,bindingResult.getFieldError().getDefaultMessage());
         }
-        return girlRepository.save(girl);
+
+        return ResultUtil.success(girlRepository.save(girl));
     }
 
     /**
@@ -88,6 +94,10 @@ public class GirlController {
     @GetMapping(value = "/girls/age/{age}")
     public List<GirlEntity> girlListByAge(@PathVariable Integer age) {
         return girlRepository.findByAge(age);
+    }
+    @GetMapping(value = "girls/getage/{id}")
+    public void getAge(@PathVariable("id") Integer id)throws Exception{
+       girlService.getAge(id);
     }
 
 }
