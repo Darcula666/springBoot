@@ -3,10 +3,7 @@ package com.gfdz.entity;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Min;
 
 /**
@@ -25,7 +22,8 @@ public class GirlEntity {
     }
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "girl_seq")
+    @SequenceGenerator(sequenceName = "girl_seq", allocationSize = 1, name = "girl_seq")
     public Integer getId() {
         return id;
     }

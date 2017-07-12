@@ -1,12 +1,21 @@
 spring:
   profiles:
     active: prod
-  datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/dbgirl
-    username: root
-    password: root
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: true
+      show-sql: true
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@127.0.0.1:1521:orcl
+    username: sboot
+    password: sboot
+    # HikariCP settings
+    # spring.datasource.hikari.*
+    hikari:
+      connection-timeout: 60000
+      maximum-pool-size: 5
+  mvc:
+    view:
+      prefix: /webpage/
+      suffix: .html

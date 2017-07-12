@@ -1,11 +1,4 @@
 server:
   port: 8081
   context-path: /
-spring:
-  freemarker:
-    cache: false
-    check-template-location: true
-    content-type: text/html
-    suffix: .html
-    template-loader-path: classpath:/templates/
 

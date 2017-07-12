@@ -46,7 +46,6 @@ public class GirlController {
         if (bindingResult.hasErrors()) {//发生错误
             return ResultUtil.error(1,bindingResult.getFieldError().getDefaultMessage());
         }
-
         return ResultUtil.success(girlRepository.save(girl));
     }
 
