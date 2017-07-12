@@ -15,7 +15,13 @@ spring:
     hikari:
       connection-timeout: 60000
       maximum-pool-size: 5
-  mvc:
-    view:
-      prefix: /webpage/
-      suffix: .html
+  thymeleaf:
+    cache: true
+    check-template: true
+    content-type: text/html
+    encoding: utf-8
+    excluded-view-names:
+    mode: HTML5
+    prefix: classpath:/templates/
+    suffix: .html
+    template-resolver-order:
