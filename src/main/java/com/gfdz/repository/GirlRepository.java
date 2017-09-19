@@ -11,4 +11,7 @@ import java.util.List;
 public interface GirlRepository extends JpaRepository<GirlEntity,Integer> {
     //通过年龄查询
     public List<GirlEntity> findByAge(Integer age);
+
+    public GirlEntity findByName(String name);
+    public GirlEntity findById(String id);
 }

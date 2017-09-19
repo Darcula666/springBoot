@@ -15,8 +15,8 @@ public class GirlService {
     @Autowired
     private GirlRepository girlRepository;
 
-    public void getAge(Integer id) throws Exception {
-        GirlEntity girl = girlRepository.findOne(id);
+    public Integer getAge(String id) throws Exception {
+        GirlEntity girl = girlRepository.findById(id);
         Integer age = girl.getAge();
         if (age < 10) {
             //返回“你还在上小学吧” code:100
@@ -25,12 +25,13 @@ public class GirlService {
             //你可能已经上初中了 code:101
             throw new GirlException(ResultEnum.MIDDLE_SCHOOL);
         }
+        return age;
     }
 
     /**
-     * 通过id查询一个女生信息
+     * 通过姓名查询一个女生信息
      */
-    public GirlEntity findOne(Integer id) {
-        return girlRepository.findOne(id);
+    public GirlEntity findByName(String name) {
+        return girlRepository.findByName(name);
     }
 }

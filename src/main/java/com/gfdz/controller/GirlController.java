@@ -31,7 +31,7 @@ public class GirlController {
      *
      * @return
      */
-    @ApiOperation(value = "获取用户列表",notes = "")
+    @ApiOperation(value = "获取用户列表", notes = "")
     @GetMapping
     public List<GirlEntity> girlList() {
         return girlRepository.findAll();
@@ -44,13 +44,13 @@ public class GirlController {
      * @return
      * @Valid:验证
      */
-    @ApiOperation(value = "添加一个女生",notes = "")
-    @ApiImplicitParam(name = "girl",value = "girl实体",required = true)
+    @ApiOperation(value = "添加一个女生", notes = "")
+    @ApiImplicitParam(name = "girl", value = "girl实体", required = true)
     @PostMapping
     public ResultEntity<GirlEntity> girlAdd(@Valid GirlEntity girl, BindingResult bindingResult) {
-        ResultEntity result=new ResultEntity();
+        ResultEntity result = new ResultEntity();
         if (bindingResult.hasErrors()) {//发生错误
-            return ResultUtil.error(1,bindingResult.getFieldError().getDefaultMessage());
+            return ResultUtil.error(1, bindingResult.getFieldError().getDefaultMessage());
         }
         return ResultUtil.success(girlRepository.save(girl));
     }
@@ -60,8 +60,8 @@ public class GirlController {
      *
      * @return
      */
-    @ApiOperation(value = "查询一个女生",notes = "通过url的id来获取用户详细信息")
-    @ApiImplicitParam(name = "id",value = "girl实体ID",required = true,dataType = "Long")
+    @ApiOperation(value = "查询一个女生", notes = "通过url的id来获取用户详细信息")
+    @ApiImplicitParam(name = "id", value = "girl实体ID", required = true, dataType = "Long")
     @GetMapping(value = "/{id}")
     public GirlEntity girlFindOne(@PathVariable("id") Integer id) {
         return girlRepository.findOne(id);
@@ -72,10 +72,10 @@ public class GirlController {
      *
      * @return
      */
-    @ApiOperation(value = "更新一个女生",notes = "通过url的id来指定更新对象，并根据传过来的gril信息来更新girl详细信息")
-    @ApiImplicitParam(name = "id",value = "girl实体ID",required = true,dataType = "Long")
+    @ApiOperation(value = "更新一个女生", notes = "通过url的id来指定更新对象，并根据传过来的gril信息来更新girl详细信息")
+    @ApiImplicitParam(name = "id", value = "girl实体ID", required = true, dataType = "Long")
     @PutMapping(value = "/{id}")
-    public GirlEntity girlUpdate(@PathVariable("id") Integer id,
+    public GirlEntity girlUpdate(@PathVariable("id") String id,
                                  @RequestParam("cupSize") String cupSize,
                                  @RequestParam("age") Integer age) {
         GirlEntity girl = new GirlEntity();
@@ -90,8 +90,8 @@ public class GirlController {
      *
      * @param id
      */
-    @ApiOperation(value = "删除一个女生",notes = "根据url的id来指定删除对象")
-    @ApiImplicitParam(name = "id",value = "girl实体ID",required = true,dataType = "Long")
+    @ApiOperation(value = "删除一个女生", notes = "根据url的id来指定删除对象")
+    @ApiImplicitParam(name = "id", value = "girl实体ID", required = true, dataType = "Long")
     @DeleteMapping(value = "{id}")
     public void deleteGirl(@PathVariable("id") Integer id) {
         girlRepository.delete(id);
@@ -102,18 +102,25 @@ public class GirlController {
      *
      * @param age
      */
-    @ApiOperation(value = "删除一个女生",notes = "根据url的年龄查询女生")
-    @ApiImplicitParam(name = "age",value = "girl实体年龄",required = true,dataType = "Long")
+    @ApiOperation(value = "删除一个女生", notes = "根据url的年龄查询女生")
+    @ApiImplicitParam(name = "age", value = "girl实体年龄", required = true, dataType = "Long")
     @GetMapping(value = "/age/{age}")
     public List<GirlEntity> girlListByAge(@PathVariable Integer age) {
         return girlRepository.findByAge(age);
     }
 
-    @ApiOperation(value = "获取一个女生的age",notes = "根据url的id查询女生的age")
-    @ApiImplicitParam(name = "age",value = "girl实体年龄",required = true,dataType = "Long")
-    @GetMapping(value = "/getage/{id}")
-    public void getAge(@PathVariable("id") Integer id)throws Exception{
-       girlService.getAge(id);
+    @ApiOperation(value = "获取一个女生的age", notes = "根据url的id查询女生的age")
+    @ApiImplicitParam(name = "age", value = "girl实体年龄", required = true, dataType = "Long")
+    @GetMapping(value = "/getAge/{id}")
+    public Integer getAge(@PathVariable("id") String id) throws Exception {
+        return girlService.getAge(id);
+    }
+
+    @ApiOperation(value = "获取一个女生", notes = "根据url的name查询女生")
+    @ApiImplicitParam(name = "name", value = "girl实体姓名", required = true, dataType = "String")
+    @GetMapping(value = "/findByName/{name}")
+    public GirlEntity findByName(@PathVariable("name") String name) throws Exception {
+        return girlService.findByName(name);
     }
 
 }
