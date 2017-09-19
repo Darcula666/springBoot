@@ -72,7 +72,7 @@ public class GirlController {
      *
      * @return
      */
-    @ApiOperation(value = "新一个女生",notes = "通过url的id来指定更新对象，并根据传过来的gril信息来更新girl详细信息")
+    @ApiOperation(value = "更新一个女生",notes = "通过url的id来指定更新对象，并根据传过来的gril信息来更新girl详细信息")
     @ApiImplicitParam(name = "id",value = "girl实体ID",required = true,dataType = "Long")
     @PutMapping(value = "/{id}")
     public GirlEntity girlUpdate(@PathVariable("id") Integer id,

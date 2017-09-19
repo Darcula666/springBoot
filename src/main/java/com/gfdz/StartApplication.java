@@ -10,9 +10,9 @@ import org.springframework.context.annotation.Configuration;
 @EnableAutoConfiguration
 @ComponentScan(basePackages = {"com.gfdz"})
 @SpringBootApplication
-public class DemoApplication {
+public class StartApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
+		SpringApplication.run(StartApplication.class, args);
 	}
 }

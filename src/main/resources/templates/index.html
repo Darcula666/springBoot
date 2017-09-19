@@ -1,10 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8" />
     <title>Hello SpringBoot</title>
+    <script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+    <script src="/ui/ui-bootstrap-tpls-2.5.0.min.js"></script>
+    <style>
+        table, th , td {
+            border: 1px solid grey;
+            border-collapse: collapse;
+            padding: 5px;
+        }
+        table tr:nth-child(odd) {
+            background-color: #f1f1f1;
+        }
+        table tr:nth-child(even) {
+            background-color: #ffffff;
+        }
+    </style>
+
 </head>
 <body>
 <h1 th:text="${host}">Hello World</h1>
+<div ng-app="myApp" ng-controller="siteCtrl">
+    <table>
+        <tr ng-repeat="x in names">
+            <td>{{ x.cupSize }}</td>
+            <td>{{ x.age }}</td>
+        </tr>
+    </table>
+</div>
 </body>
+<script>
+    var app = angular.module('myApp', []);
+    app.controller('siteCtrl', function($scope, $http) {
+        $http.get("http://localhost:8081/girls")
+            .then(function (response) {
+                $scope.names = response.data;
+            });
+    });
+</script>
 </html>

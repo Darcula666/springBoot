@@ -5,6 +5,7 @@ spring:
     hibernate:
       ddl-auto: update
       show-sql: true
+
   datasource:
     driver-class-name: oracle.jdbc.OracleDriver
     url: jdbc:oracle:thin:@127.0.0.1:1521:orcl
@@ -25,3 +26,9 @@ spring:
     prefix: classpath:/templates/
     suffix: .html
     template-resolver-order:
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: true
+      additional-paths: src/main/java

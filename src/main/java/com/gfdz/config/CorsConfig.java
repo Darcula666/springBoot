@@ -1,4 +1,4 @@
-package com.gfdz.controller;
+package com.gfdz.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
