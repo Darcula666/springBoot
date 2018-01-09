@@ -1,44 +1,29 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
     <meta charset="UTF-8" />
     <title>Hello SpringBoot</title>
-    <script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
-    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../static/plugin/angular/angular.min.js"></script>
+    <link href="../static/plugin/bootstrap-3.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/index.css" rel="stylesheet">
     <!--<script src="/ui/ui-bootstrap-tpls-2.5.0.min.js"></script>-->
-    <style>
-        table, th , td {
-            border: 1px solid grey;
-            border-collapse: collapse;
-            padding: 5px;
-        }
-        table tr:nth-child(odd) {
-            background-color: #f1f1f1;
-        }
-        table tr:nth-child(even) {
-            background-color: #ffffff;
-        }
-    </style>
-
 </head>
 <body>
-<h1 th:text="${host}">Hello World</h1>
-<div ng-app="myApp" ng-controller="siteCtrl">
-    <table>
-        <tr ng-repeat="x in names">
-            <td>{{ x.cupSize }}</td>
-            <td>{{ x.age }}</td>
-        </tr>
+<div ng-app="myApp" class="container" ng-controller="siteCtrl">
+    <table class="table table-striped">
+       <thead>
+       <tr>
+           <th>id</th>
+           <th>姓名</th>
+           <th>年龄</th>
+           <th>cup</th>
+       </tr>
+       </thead>
+        <tbody>
+         <tr ng-repeat=" item in girls"></tr>
+        </tbody>
     </table>
 </div>
 </body>
-<script>
-    var app = angular.module('myApp', []);
-    app.controller('siteCtrl', function($scope, $http) {
-        $http.get("http://localhost:8081/girls")
-            .then(function (response) {
-                $scope.names = response.data;
-            });
-    });
-</script>
+<script type="text/javascript" src="js/index.js"></script>
 </html>

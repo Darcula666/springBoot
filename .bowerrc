@@ -1,0 +1,6 @@
+{
+  "directory": "src/main/resources/static/plugin/",
+  "timeout": 120000,
+  "registry": {
+  }
+}
