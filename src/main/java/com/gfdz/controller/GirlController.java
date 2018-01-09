@@ -8,6 +8,10 @@ import com.gfdz.utils.ResultUtil;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,6 +30,7 @@ public class GirlController {
     @Autowired
     private GirlService girlService;
 
+
     /**
      * 查询所有女生列表
      *
@@ -35,6 +40,20 @@ public class GirlController {
     @GetMapping
     public List<GirlEntity> girlList() {
         return girlRepository.findAll();
+    }
+
+    /**
+     * 查询所有女生列表
+     *
+     * @return
+     */
+    @ApiOperation(value = "获取用户列表page", notes = "")
+    @GetMapping(value = "/getList")
+    public Page<GirlEntity> girlPageList() {
+        Integer page=0;
+        Integer size=2;
+        Pageable pageable = new PageRequest(page, size, Sort.Direction.ASC, "id");
+        return girlRepository.findAll(pageable);
     }
 
     /**

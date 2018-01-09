@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AdminLTE 2 | Data Tables</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+    <link href="../static/plugin/bootstrap-3.3.5/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../static/plugin/font-awesome/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link href="../static/plugin/Ionicons/css/ionicons.min.css" rel="stylesheet"/>
+    <!-- DataTables -->
+    <link rel="stylesheet" href="../static/plugin/datatables.net-bs/css/dataTables.bootstrap.min.css">
+    <!-- Theme style -->
+    <link href="../static/plugin/adminLTE/dist/css/AdminLTE.min.css" rel="stylesheet"/>
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link href="../static/plugin/adminLTE/dist/css/skins/all-skins.min.css" rel="stylesheet"/>
+</head>
+<body class="hold-transition skin-blue sidebar-mini" style="background-color:#ecf0f5">
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table table-bordered table-hover" id="favourable">
+                <thead>
+                <tr>
+                    <th class="table-checkbox">
+                        <input type="checkbox" class="group-checkable" data-set="#favourable .checkboxes"/>
+                    </th>
+                    <th>
+                        收费规则编号
+                    </th>
+                    <th>
+                        收费规则名称
+                    </th>
+                    <th>
+                        类型
+                    </th>
+                    <th>
+                        状态
+                    </th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<!-- ./wrapper -->
+<!-- jQuery 3 -->
+<script src="../static/plugin/jquery/jquery-3.2.0.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="../static/plugin/bootstrap-3.3.5/dist/js/bootstrap.min.js"></script>
+<!-- DataTables -->
+<script src="../static/plugin/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="../static/plugin/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="../static/plugin/datatables.net-bs/extensions/Buttons/js/dataTables.buttons.min.js"></script>
+<!-- SlimScroll -->
+<script src="../static/plugin/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="../static/plugin/fastclick/lib/fastclick.js"></script>
+<!-- AdminLTE App -->
+
+<script src="../static/plugin/adminLTE/dist/js/adminlte.min.js"></script>
+<!-- page script -->
+<script>
+    $(function () {
+        $('#example2').DataTable({
+            'paging': true,
+            'lengthChange': true,
+            'searching': false,
+            'ordering': false,
+            'serverSide': true,
+            'sPaginationType': 'full_numbers',      //分页样式
+            'stateSave': true,//保持翻页状态，和comTable.fnDraw(false);结合使用
+            'ajax': {
+                'type': "post",
+                'url': "http://localhost:8081/girls",
+                dataType: "json",
+                dataSrc: "data",
+                data: function (d) {
+                    var param = {};
+                    param.draw = d.draw;
+                    param.start = d.start;
+                    param.length = d.length;
+                    var formData = $("#queryForm").serializeArray();//把form里面的数据序列化成数组
+                    formData.forEach(function (e) {
+                        param[e.name] = e.value;
+                    });
+                    return param;//自定义需要传递的参数。
+                },
+                success: function (data) {
+                    //$("#url_sortdata").val(data.aaData);
+                    fnCallback(data); //服务器端返回的对象的returnObject部分是要求的格式
+                }
+            },
+            'processing': true,
+            'info': true,
+            'autoWidth': false,
+            "lengthMenu": [
+                [10, 15, 20],
+                [10, 15, 20] // 更改每页显示记录数
+            ],
+            "oLanguage": { // 国际化配置
+                "sProcessing": "正在获取数据，请稍后...",
+                "sLengthMenu": "显示 _MENU_ 条",
+                "sZeroRecords": "没有找到数据",
+                "sInfo": "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
+                "sInfoEmpty": "记录数为0",
+                "sInfoFiltered": "(全部记录数 _MAX_ 条)",
+                "sInfoPostFix": "",
+                "sSearch": "查询",
+                "sUrl": "",
+                "oPaginate": {
+                    "sFirst": "第一页",
+                    "sPrevious": "上一页",
+                    "sNext": "下一页",
+                    "sLast": "最后一页"
+                }
+            },
+        })
+    })
+</script>
+</body>
+</html>

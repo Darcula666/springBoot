@@ -22,7 +22,7 @@ spring:
     content-type: text/html
     encoding: utf-8
     excluded-view-names:
-    mode: HTML5
+    mode: LEGACYHTML5
     prefix: classpath:/templates/
     suffix: .html
     template-resolver-order:
@@ -37,8 +37,15 @@ spring:
     port: 6379
     pool:
       max-idle: 8
-      min-idle:
-      max-active:
+      min-idle: 0
+      max-active: 0
       max-wait: -1
-
-
+  http:
+    multipart:
+      enabled: true
+      file-size-threshold: 0
+      max-file-size: 100Mb
+      max-request-size: 100Mb
+logging:
+  file: D:\mylog\log.txt
+  level: debug

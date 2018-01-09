@@ -4,6 +4,8 @@ import com.gfdz.entity.GirlEntity;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
@@ -21,4 +23,7 @@ public interface GirlRepository extends JpaRepository<GirlEntity,Integer> {
      GirlEntity findById(String id);
     @CachePut(key = "#p0.name")
     GirlEntity save(GirlEntity girl);
+
+    @Override
+    Page<GirlEntity> findAll(Pageable pageable);
 }
