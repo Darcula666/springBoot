@@ -17,7 +17,7 @@ spring:
       connection-timeout: 60000
       maximum-pool-size: 5
   thymeleaf:
-    cache: true
+    cache: false
     check-template: true
     content-type: text/html
     encoding: utf-8
