@@ -1,12 +1,10 @@
-/*var app = angular.module('myApp', []);
-app.controller('siteCtrl', function($scope, $http) {
+var app = angular.module('myApp', ['ui.bootstrap']);
+app.controller('ModalDemoCtrl', function ($uibModal, $log, $document,$scope, $http) {
     $http.get("http://localhost:8081/girls")
         .then(function (response) {
             $scope.girls = response.data;
         });
-});*/
 
-angular.module('ui.bootstrap.demo',['ui.bootstrap']).controller('ModalDemoCtrl', function ($uibModal, $log, $document) {
     var $ctrl = this;
     $ctrl.items = ['item1', 'item2', 'item3'];
 
@@ -23,6 +21,8 @@ angular.module('ui.bootstrap.demo',['ui.bootstrap']).controller('ModalDemoCtrl',
             controller: 'ModalInstanceCtrl',
             controllerAs: '$ctrl',
             size: size,
+            close:true,
+            backdrop:'static',
             appendTo: parentElem,
             resolve: {
                 items: function () {
@@ -63,7 +63,7 @@ angular.module('ui.bootstrap.demo',['ui.bootstrap']).controller('ModalDemoCtrl',
             ariaDescribedBy: 'modal-body-bottom',
             templateUrl: 'stackedModal.html',
             size: 'sm',
-            controller: function($scope) {
+            controller: function ($scope) {
                 $scope.name = 'bottom';
             }
         });
@@ -74,7 +74,7 @@ angular.module('ui.bootstrap.demo',['ui.bootstrap']).controller('ModalDemoCtrl',
             ariaDescribedBy: 'modal-body-top',
             templateUrl: 'stackedModal.html',
             size: 'sm',
-            controller: function($scope) {
+            controller: function ($scope) {
                 $scope.name = 'top';
             }
         });
@@ -88,7 +88,7 @@ angular.module('ui.bootstrap.demo',['ui.bootstrap']).controller('ModalDemoCtrl',
 // Please note that $uibModalInstance represents a modal window (instance) dependency.
 // It is not the same as the $uibModal service used above.
 
-angular.module('ui.bootstrap.demo').controller('ModalInstanceCtrl', function ($uibModalInstance, items) {
+app.controller('ModalInstanceCtrl', function ($uibModalInstance, items) {
     var $ctrl = this;
     $ctrl.items = items;
     $ctrl.selected = {
@@ -106,7 +106,7 @@ angular.module('ui.bootstrap.demo').controller('ModalInstanceCtrl', function ($u
 
 // Please note that the close and dismiss bindings are from $uibModalInstance.
 
-angular.module('ui.bootstrap.demo').component('modalComponent', {
+app.component('modalComponent', {
     templateUrl: 'myModalContent.html',
     bindings: {
         resolve: '<',

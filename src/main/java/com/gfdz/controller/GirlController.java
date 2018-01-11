@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.SocketTimeoutException;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by Administrator on 2017/3/26.
@@ -71,6 +72,7 @@ public class GirlController {
         if (bindingResult.hasErrors()) {//发生错误
             return ResultUtil.error(1, bindingResult.getFieldError().getDefaultMessage());
         }
+        girl.setId("");
         return ResultUtil.success(girlRepository.save(girl));
     }
 
